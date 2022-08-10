@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useContext, useEffect } from 'react';
+import axios from 'axios';
 import TinderCard from 'react-tinder-card';
 import { AllContext } from './App.jsx';
 import styled from 'styled-components';
@@ -34,13 +35,20 @@ const Card = () => {
 
   // set last direction and decrease current index
   const swiped = (direction, cat, index) => {
-    if (direction === 'right') {
+    setLastDirection(direction);
+    updateCurrentIndex(index - 1);
+
+    if (cat.saved === false && direction === 'right') {
       cat.saved = true;
-    } else if (direction !== 'right') {
+      axios.put(`/cats/${cat.id}`)
+        .then(() => console.log('Toggled to True'))
+        .catch(e => console.log('Failed to toggle', e))
+    } else if (cat.saved === true && direction !== 'right') {
       cat.saved = false;
+      axios.put(`/cats/${cat.id}`)
+        .then(() => console.log('Toggled to False'))
+        .catch(e => console.log('Failed to toggle', e))
     }
-    setLastDirection(direction)
-    updateCurrentIndex(index - 1)
   }
 
   const outOfFrame = (name, idx) => {
@@ -67,42 +75,22 @@ const Card = () => {
   }
 
   return (
-    <div>
-      {/* <div className='navbar'>
-        <i
-          className="bi bi-star-fill"
-          style={{ color: '#F5B7B1', "font-size": "25px" }}
-          onClick={() => {
-            setShowCards(false);
-            setShowFavs(true);
-          }}
-        />
-        <h1 onClick={() => {
-          setShowCards(true);
-          setShowFavs(false);
-        }}> Tinder Cat </h1>
-        <i class="bi bi-envelope-fill" style={{ color: '#cdd1d0', "font-size": "25px" }} />
-      </div> */}
+    <>
       <div className='cardContainer'>
         {cats.map((cat, index) => (
           <TinderCard
             ref={childRefs[index]}
-            className='swipe'
+            className='swipe p-3 bg-light rounded'
             key={cat.name}
             onSwipe={(dir) => {
               swiped(dir, cat, index)
             }}
             onCardLeftScreen={() => outOfFrame(cat.name, index)}
           >
-            <div
-              style={{ backgroundImage: `url(${cat.photos[0]})` }}
-              className='card'
-            >
-              {/* <img src={cat.photos[0]}></img> */}
-              <div>{cat.name}</div>
-              <div>{cat.age}</div>
-              <div>{cat.breeds}</div>
-              <div>{cat.size}</div>
+            <Img src={cat.photos[0]} className='card'></Img>
+            <div>
+              <div style={{ "font-weight": '600' }}>{cat.name}, {cat.age.toLowerCase()}</div>
+              <div>{cat.size}, {cat.breeds.toLowerCase()}</div>
             </div>
           </TinderCard>
         ))}
@@ -134,8 +122,15 @@ const Card = () => {
         </button>
       </div>
 
-    </div>
+    </>
   )
 }
 
 export default Card;
+
+const Img = styled.img`
+  max-width: 260px;
+  height: 300px;
+  object-fit: cover;
+  align-self: center;
+`

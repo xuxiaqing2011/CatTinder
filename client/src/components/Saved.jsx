@@ -9,9 +9,13 @@ const Saved = () => {
   return (
     <div className='images'>
       {savedCats.map(cat => {
-        return <a href={cat.url} width="24%">
-          <Img key={cat.name} src={cat.photos[0]}/>
+        return (
+          <div style={{ width: "23%", height: "100px" }}>
+          <a href={cat.url}>
+            <Img key={cat.name} src={cat.photos[0]} />
           </a>
+          </div>
+        )
       })}
     </div>
   )
@@ -20,8 +24,8 @@ const Saved = () => {
 export default Saved;
 
 const Img = styled.img`
-  width: 100%;
-  height: 100px;
+  width: 90%;
+  height: 90%;
   object-fit: cover;
   align-self: center;
   margin: 3px 3px;

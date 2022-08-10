@@ -8,19 +8,25 @@ const Navbar = () => {
     <div className='navbar'>
       <i
         className="bi bi-star-fill"
-        style={{ color: '#F5B7B1', "font-size": "25px" }}
+        style={{ color: '#F5B7B1', "font-size": "25px", cursor: 'pointer' }}
         onClick={() => {
           setShowCards(false);
           setShowFavs(true);
         }}
       />
-      <h1
-      onClick={() => {
-        setShowCards(true);
-        setShowFavs(false);
-      }}
-      > Tinder Cat </h1>
-      <i class="bi bi-envelope-fill" style={{ color: '#cdd1d0', "font-size": "25px" }} />
+      <h1> Tinder Cat </h1>
+
+      <img
+        src="https://cdn.worldvectorlogo.com/logos/tinder-2.svg"
+        // width="30px"
+        style={{ cursor: 'pointer'}}
+        height="30px"
+        onClick={() => {
+          setShowCards(true);
+          setShowFavs(false);
+        }}
+      />
+
     </div>
   )
 

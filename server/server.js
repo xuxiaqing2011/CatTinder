@@ -5,7 +5,7 @@ const path = require('path');
 const morgan = require('morgan');
 // const cors = require('cors');
 
-const { getCats } = require('./controller.js');
+const { getCats, updateCat } = require('./controller.js');
 const app = express();
 
 app.use(morgan('dev'));
@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 // app.options('*', cors());
 
 app.get('/cats', getCats);
+
+app.put('/cats/:id', updateCat);
 
 
 app.listen(process.env.PORT);
