@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useMemo, useRef, useContext } from 'react';
+import React, { useState, useEffect, useMemo, useRef, createContext } from 'react';
 import axios from 'axios';
 import Card from './Card.jsx';
+import Saved from './Saved.jsx';
 import Navbar from './Navbar.jsx';
 import './App.css';
 
@@ -11,6 +12,7 @@ const App = () => {
   const [fav, setFav] = useState([]);
   const [showCards, setShowCards] = useState(true);
   const [showFavs, setShowFavs] = useState(false);
+  // const [view, setView] = useState('swipe');
 
   useEffect(() => {
     axios.get('/cats')
@@ -20,16 +22,18 @@ const App = () => {
   }, [])
 
 
-  return <div className='app'>
-    <AllContext.Provider value={{ cats, setCats, fav, setFav }}>
-      {/* <Navbar /> */}
-      {showCards && <Card />}
+  return (
+    <div className='app'>
 
-      {showFavs && <div>Show Favorite</div>}
+      <AllContext.Provider value={{ cats, setShowCards, setShowFavs }}>
+        <Navbar />
+        {showCards && <Card />}
+        {showFavs && <Saved />}
+        {/* <Saved /> */}
+      </AllContext.Provider>
 
-    </AllContext.Provider>
-
-  </div>
+    </div>
+  )
 }
 
 export default App;

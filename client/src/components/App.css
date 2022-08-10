@@ -41,6 +41,21 @@ h2 {
   color: #fff;
 }
 
+.navbar {
+  display: flex;
+  width: 290px;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+}
+
+.images {
+  display: flex;
+  width: 300px;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center;
+}
+
 .swipe {
   position: absolute;
 }
@@ -57,10 +72,12 @@ h2 {
   width: 80vw;
   max-width: 260px;
   height: 300px;
-  box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+  /* box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30); */
   border-radius: 20px;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .cardContent {
@@ -72,10 +89,17 @@ h2 {
 
 }
 
-.card h3 {
-  position: absolute;
-  bottom: 0;
-  margin: 10px;
+/* .card img {
+  max-width: 260px;
+  height: 200px;
+  object-fit: cover;
+} */
+
+.card div {
+  /* position: absolute; */
+  /* bottom: 0; */
+
+  /* margin: 10px; */
   color: #fff;
 }
 
@@ -91,21 +115,26 @@ h2 {
 
 .buttons {
   margin: 20px;
+  width: 260px;
   display: flex;
+  justify-content: space-around;
 }
 
 .buttons button {
   flex-shrink: 0;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 50%;
   border: none;
-  color: #fff;
+  width: 60px;
+  height: 60px;
+  /* color: #fff; */
   font-size: 18px;
-  background-color: #9198e5;
+  /* background-color: #9198e5; */
+  background-color: #fff;
   transition: 200ms;
-  margin: 0 10px;
-  font-weight: bolder;
-  width: 160px;
+  /* margin: 0 10px; */
+  /* font-weight: bolder; */
+  /* width: 160px; */
   box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.10);
 }
 

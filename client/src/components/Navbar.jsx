@@ -1,11 +1,26 @@
-import React, { useState, useMemo, useRef } from 'react';
-
+import React, { useState, useMemo, useRef, useContext } from 'react';
+import { AllContext } from './App.jsx';
 
 const Navbar = () => {
+  const { setShowCards, setShowFavs } = useContext(AllContext);
+
   return (
-    <div style={{ display: "flex", flex_direction: "row", height: "100px", "z-index": "1000"}}>
-      <i className="bi bi-heart" />
-      <i class="bi bi-chat-heart" />
+    <div className='navbar'>
+      <i
+        className="bi bi-star-fill"
+        style={{ color: '#F5B7B1', "font-size": "25px" }}
+        onClick={() => {
+          setShowCards(false);
+          setShowFavs(true);
+        }}
+      />
+      <h1
+      onClick={() => {
+        setShowCards(true);
+        setShowFavs(false);
+      }}
+      > Tinder Cat </h1>
+      <i class="bi bi-envelope-fill" style={{ color: '#cdd1d0', "font-size": "25px" }} />
     </div>
   )
 
