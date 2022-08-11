@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 const { getCats, updateCat } = require('./controller.js');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -23,7 +24,7 @@ app.get('/cats', getCats);
 app.put('/cats/:id', updateCat);
 
 
-app.listen(process.env.PORT);
-console.log(`Server listening at http://localhost:${process.env.PORT}`);
+app.listen(PORT);
+console.log(`Server listening at ${PORT}`);
 
 module.exports.app = app;

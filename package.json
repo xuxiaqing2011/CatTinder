@@ -6,9 +6,10 @@
   "author": "Xiaqing Xu <xuxiaqing2011@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --mode=development --watch",
+    "start": "node server/server.js",
+    "webpack": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
-    "server": "nodemon server/server.js",
+    "server": "node server/server.js",
     "seed": "node server/seeds.js"
   },
   "dependencies": {
