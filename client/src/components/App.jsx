@@ -12,14 +12,13 @@ const App = () => {
   const [fav, setFav] = useState([]);
   const [showCards, setShowCards] = useState(true);
   const [showFavs, setShowFavs] = useState(false);
-  // const [view, setView] = useState('swipe');
 
   useEffect(() => {
     axios.get('/cats')
       .then(res => {
         setCats(res.data);
       })
-  }, [])
+  }, []);
 
 
   return (
@@ -29,7 +28,6 @@ const App = () => {
         <Navbar />
         {showCards && <Card />}
         {showFavs && <Saved />}
-        {/* <Saved /> */}
       </AllContext.Provider>
 
     </div>

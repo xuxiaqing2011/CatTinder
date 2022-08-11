@@ -52,12 +52,8 @@ const Card = () => {
   }
 
   const outOfFrame = (name, idx) => {
-    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
-    // handle the case in which go back is pressed before card goes outOfFrame
-    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-    // TODO: when quickly swipe and restore multiple times the same card,
-    // it happens multiple outOfFrame events are queued and the card disappear
-    // during latest swipes. Only the last outOfFrame event should be considered valid
+    console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current);
+    currentIndexRef.current >= idx && childRefs[idx].current.restoreCard();
   }
 
   const swipe = async (dir) => {
@@ -70,7 +66,7 @@ const Card = () => {
   const goBack = async () => {
     if (!canGoBack) return
     const newIndex = currentIndex + 1
-    updateCurrentIndex(newIndex)
+    updateCurrentIndex(newIndex);
     await childRefs[newIndex].current.restoreCard()
   }
 
@@ -81,7 +77,7 @@ const Card = () => {
           <TinderCard
             ref={childRefs[index]}
             className='swipe p-3 bg-light rounded'
-            key={cat.name}
+            key={cat.name + "+" + index}
             onSwipe={(dir) => {
               swiped(dir, cat, index)
             }}
@@ -89,7 +85,7 @@ const Card = () => {
           >
             <Img src={cat.photos[0]} className='card'></Img>
             <div>
-              <div style={{ "font-weight": '600' }}>{cat.name}, {cat.age.toLowerCase()}</div>
+              <div style={{ fontWeight: '600' }}>{cat.name}, {cat.age.toLowerCase()}</div>
               <div>{cat.size}, {cat.breeds.toLowerCase()}</div>
             </div>
           </TinderCard>
@@ -99,24 +95,26 @@ const Card = () => {
         <button
           style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
           onClick={() => swipe('left')}>
-          <i class="bi bi-x-lg" style={{ "font-size": "25px", "color": "#E74C3C" }} />
+          <i className="bi bi-x-lg" style={{ fontSize: "25px", "color": "#E74C3C" }} />
         </button>
         <button
           style={{ backgroundColor: !canGoBack && '#c3c4d3' }}
           onClick={() => {
             goBack();
           }}>
-          <i class="bi bi-arrow-counterclockwise" style={{ "font-size": "25px", color: '#2f2e2e' }} />
+          <i className="bi bi-arrow-counterclockwise" style={{ fontSize: "25px", color: '#2f2e2e' }} />
         </button>
         <button
           style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
           onClick={() => swipe('right')}>
           {cats[currentIndex] && cats[currentIndex].saved ?
-            <i class="bi bi-heart-fill"
-              style={{ "font-size": "25px", "color": "#c94884" }}
+            <i className="bi bi-heart-fill"
+              style={{ fontSize: "25px", "color": "#c94884" }}
+              onClick={() => swipe('right')}
             /> :
-            <i class="bi bi-heart-fill"
-              style={{ "font-size": "25px", "color": "#48C9B0" }}
+            <i className="bi bi-heart-fill"
+              style={{ fontSize: "25px", "color": "#48C9B0" }}
+              onClick={() => swipe('right')}
             />
           }
         </button>
@@ -134,3 +132,20 @@ const Img = styled.img`
   object-fit: cover;
   align-self: center;
 `
+
+// let swipes = [];
+//   console.log(currentIndex, cats.length);
+//   if (currentIndex && cats.length) {
+//     for (let i = cats.length - 1; i > currentIndex; i--) {
+//       swipes.push(i);
+//     }
+//   }
+
+{/* {swipes.length && cats.length && swipes.map(n => {
+  if (cats[n].saved === false) {
+    swipe('left');
+  } else if (cats[n].saved === true) {
+    swipe('right');
+  }
+})
+} */}

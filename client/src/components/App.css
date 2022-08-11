@@ -22,6 +22,7 @@ h1 {
   font-family: 'Damion', cursive;
   color: #fff;
   text-shadow: 0px 0px 60px 0px rgba(0,0,0,0.50);
+  margin-bottom: 0px;
 }
 
 h2 {
@@ -33,6 +34,7 @@ h2 {
   width: 300px;
   flex-direction: row !important;
   justify-content: space-between !important;
+  align-items: center;
 }
 
 .images {
@@ -45,7 +47,7 @@ h2 {
 
 .swipe {
   position: absolute;
-  background-color: "#e6e7e9";
+  background-color: #F8F9FA !important;
   /* height: 500px; */
 }
 
@@ -127,7 +129,7 @@ h2 {
   /* color: #fff; */
   font-size: 18px;
   /* background-color: #9198e5; */
-  background-color: #fff;
+  background-color: #F8F9FA;
   transition: 200ms;
   /* margin: 0 10px; */
   /* font-weight: bolder; */
@@ -137,6 +139,10 @@ h2 {
 
 .buttons button:hover {
   transform: scale(1.05);
+}
+
+.bi-heart-fill:active {
+  color: #c94884;
 }
 
 /* .buttons button:active {

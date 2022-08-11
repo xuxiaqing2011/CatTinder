@@ -8,7 +8,7 @@ const Navbar = () => {
     <div className='navbar'>
       <i
         className="bi bi-star-fill"
-        style={{ color: '#F5B7B1', "font-size": "25px", cursor: 'pointer' }}
+        style={{ color: '#F5B7B1', fontSize: "25px", cursor: 'pointer' }}
         onClick={() => {
           setShowCards(false);
           setShowFavs(true);
