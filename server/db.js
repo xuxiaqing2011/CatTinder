@@ -1,8 +1,10 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.DB_NAME}`)
-  .then(() => console.log('mongoose open connection to: ', process.env.DB_NAME))
+const MONGODB_URI = process.env.MONGODB_URL || `mongodb://127.0.0.1:27017/${process.env.DB_NAME}`
+
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('mongoose open connection to: ', MONGODB_URI))
   .catch(err => console.log('ERROR*************************', err));
 
 const catSchema = new mongoose.Schema(
